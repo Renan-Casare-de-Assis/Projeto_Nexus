@@ -7,9 +7,9 @@ function Badge({ children, color = 'bg-gray-200 text-gray-800' }: { children: Re
 
 function CareerCard({ title, time, cost, salary, happiness, ods, match }: { title: string; time: string; cost: string; salary: string; happiness: string; ods: string; match: number }) {
   return (
-    <div className="bg-white shadow-lg rounded-2xl p-6">
-      <div className="flex items-start justify-between mb-3">
-        <div>
+    <div className="bg-white shadow-lg rounded-2xl p-6 flex flex-col h-full">
+      <div className="flex items-start justify-between mb-3 gap-4">
+        <div className="flex-1">
           <h4 className="text-lg font-semibold text-gray-800">{title}</h4>
           <div className="mt-2 flex flex-wrap gap-2">
             <Badge color="bg-purple-100 text-purple-800">Tempo: {time}</Badge>
@@ -17,37 +17,39 @@ function CareerCard({ title, time, cost, salary, happiness, ods, match }: { titl
             <Badge color="bg-green-100 text-green-800">Salário: {salary}</Badge>
           </div>
         </div>
-        <div className="text-right">
+        <div className="text-right ml-4">
           <div className="text-sm text-gray-500">Match</div>
           <div className="text-2xl font-bold text-purple-600">{match}%</div>
         </div>
       </div>
 
-      <div className="mt-4 grid grid-cols-2 gap-3 text-sm text-gray-600">
-        <div className="flex items-center gap-2">
-          <svg className="w-5 h-5 text-yellow-500" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 2l3 7h7l-5.5 4 2 7L12 16l-6.5 4 2-7L2 9h7l3-7z" stroke="currentColor" strokeWidth="0" fill="currentColor"/>
-          </svg>
-          <div>
-            <div className="font-medium">Taxa de felicidade</div>
-            <div className="text-gray-500">{happiness}</div>
+      <div className="flex-1">
+        <div className="mt-4 grid grid-cols-2 gap-3 text-sm text-gray-600">
+          <div className="flex items-center gap-2">
+            <svg className="w-5 h-5 text-yellow-500" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 2l3 7h7l-5.5 4 2 7L12 16l-6.5 4 2-7L2 9h7l3-7z" stroke="currentColor" strokeWidth="0" fill="currentColor"/>
+            </svg>
+            <div>
+              <div className="font-medium">Taxa de felicidade</div>
+              <div className="text-gray-500">{happiness}</div>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-2">
+            <svg className="w-5 h-5 text-teal-500" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 2v10l6 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+            <div>
+              <div className="font-medium">Impacto ODS</div>
+              <div className="text-gray-500">{ods}</div>
+            </div>
           </div>
         </div>
 
-        <div className="flex items-center gap-2">
-          <svg className="w-5 h-5 text-teal-500" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 2v10l6 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-          </svg>
-          <div>
-            <div className="font-medium">Impacto ODS</div>
-            <div className="text-gray-500">{ods}</div>
+        <div className="mt-4">
+          <div className="w-full bg-gray-100 rounded-full h-2">
+            <div className="h-2 rounded-full bg-gradient-to-r from-purple-600 to-blue-500" style={{ width: `${match}%` }} />
           </div>
-        </div>
-      </div>
-
-      <div className="mt-4">
-        <div className="w-full bg-gray-100 rounded-full h-2">
-          <div className="h-2 rounded-full bg-gradient-to-r from-purple-600 to-blue-500" style={{ width: `${match}%` }} />
         </div>
       </div>
 
@@ -74,9 +76,11 @@ function Oportunidades() {
       </header>
 
       <main className="p-8 max-w-6xl mx-auto">
-        <section className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <section className="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
           {careers.map((c) => (
-            <CareerCard key={c.title} title={c.title} time={c.time} cost={c.cost} salary={c.salary} happiness={c.happiness} ods={c.ods} match={c.match} />
+            <div key={c.title} className="h-full">
+              <CareerCard title={c.title} time={c.time} cost={c.cost} salary={c.salary} happiness={c.happiness} ods={c.ods} match={c.match} />
+            </div>
           ))}
         </section>
 
