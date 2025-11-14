@@ -1,11 +1,17 @@
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 function Home() {
   const navigate = useNavigate();
+  const [name, setName] = useState('')
 
   const handleStart = (e: React.FormEvent) => {
     e.preventDefault();
-    navigate("/dashboard"); // leva para a segunda página
+    const trimmed = name.trim()
+    if (typeof window !== 'undefined') {
+      if (trimmed) localStorage.setItem('nexus_name', trimmed)
+    }
+    navigate("/dashboard", { state: { name: trimmed } }); // leva para a segunda página
   };
 
   return (
@@ -31,20 +37,24 @@ function Home() {
 
           <form className="space-y-4" onSubmit={handleStart}>     
             <div>
-              <label className="block font-medium mb-1">Se pudesse trabalhar com qualquer coisa, o que seria?</label>
+              <label className="block font-medium mb-1">Nos informe seu nome</label>
               <input 
                 type="text" 
+                value={name}
+                onChange={(e) => setName(e.target.value)}
                 placeholder="Seu nome..." 
                 className="w-full border rounded p-2" />
             </div>
+
             <div>
-            <label className="block font-medium mb-1">Qual sua profissão ou atividade atual?</label>
+              <label className="block font-medium mb-1">Qual sua profissão ou atividade atual?</label>
               <input
                 type="text"
                 placeholder="Ex: Vendedor, Professor, Desempregado..."
                 className="w-full border rounded p-2"
               />
             </div>
+
             <div>
               <label className="block font-medium mb-1">Se pudesse trabalhar com qualquer coisa, o que seria?</label>
               <input

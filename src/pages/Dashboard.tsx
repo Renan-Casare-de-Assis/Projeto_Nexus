@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 
 function RadarChart({ items, size = 300 }: { items: { name: string; value: number }[]; size?: number }) {
   const n = items.length
@@ -60,6 +60,13 @@ function RadarChart({ items, size = 300 }: { items: { name: string; value: numbe
 }
 
 function Dashboard() {
+  const location = useLocation()
+  // name can come from navigation state or localStorage (fallback)
+  const nameFromState = (location.state as any)?.name
+  let storedName = undefined
+  if (typeof window !== 'undefined') storedName = localStorage.getItem('nexus_name')
+  const displayName = nameFromState || storedName || 'Profissional'
+
   const cards = [
     { title: 'Índice Futuro-Pronto', value: '78%', hint: 'Você está acima da média!', color: 'text-purple-600' },
     { title: 'Superpoderes', value: '12', hint: 'Habilidades únicas identificadas', color: 'text-blue-600' },
@@ -102,7 +109,7 @@ function Dashboard() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-gray-50">
       <header className="bg-gradient-to-r from-purple-600 to-blue-500 text-white p-6 text-center shadow-lg">
-        <h1 className="text-3xl font-bold">Olá, Profissional! 👋</h1>
+        <h1 className="text-3xl font-bold">Olá, {displayName}! 👋</h1>
         <p className="mt-1">Seu potencial está sendo mapeado — aqui está seu painel de potencial.</p>
       </header>
 
