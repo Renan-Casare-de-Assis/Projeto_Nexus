@@ -1,0 +1,14 @@
+node_modules/
+dist/
+build/
+.env
+.env.local
+.DS_Store
+.vite
+/*.log
+coverage/
+*.local
+.idea/
+/.history/
+npm-debug.log
+package-lock.json
