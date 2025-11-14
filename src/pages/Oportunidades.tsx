@@ -8,7 +8,7 @@ function Badge({ children, color = 'bg-gray-200 text-gray-800' }: { children: Re
 function CareerCard({ title, time, cost, salary, happiness, ods, match }: { title: string; time: string; cost: string; salary: string; happiness: string; ods: string; match: number }) {
   return (
     <div className="bg-white shadow-lg rounded-2xl p-6 flex flex-col h-full">
-      <div className="flex items-start justify-between mb-3 gap-4">
+      <div className="flex items-start justify-between mb-3 gap-4 min-h-[64px]">
         <div className="flex-1">
           <h4 className="text-lg font-semibold text-gray-800">{title}</h4>
           <div className="mt-2 flex flex-wrap gap-2">
