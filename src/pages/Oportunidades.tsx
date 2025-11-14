@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import Header from '../components/Header'
 
 function Badge({ children, color = 'bg-gray-200 text-gray-800' }: { children: React.ReactNode; color?: string }) {
   return <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-semibold ${color}`}>{children}</span>
@@ -70,12 +71,13 @@ function Oportunidades() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-gray-50">
-      <header className="bg-gradient-to-r from-purple-600 to-blue-500 text-white p-6 text-center shadow-md">
-        <h1 className="text-2xl font-bold">Explorador de Futuros Possíveis</h1>
-        <p className="text-sm mt-1">Três trajetórias sugeridas com indicadores para você comparar.</p>
-      </header>
+      <Header />
 
       <main className="p-8 max-w-6xl mx-auto">
+        <div className="bg-gradient-to-r from-purple-600 to-blue-500 text-white p-6 rounded-2xl shadow mb-6">
+          <h1 className="text-2xl font-bold">Explorador de Futuros Possíveis</h1>
+          <p className="text-sm mt-1">Três trajetórias sugeridas com indicadores para você comparar.</p>
+        </div>
         <section className="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
           {careers.map((c) => (
             <div key={c.title} className="h-full">

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Header from '../components/Header'
 
 function Home() {
   const navigate = useNavigate();
@@ -16,11 +17,7 @@ function Home() {
 
   return (
     <div className="flex flex-col min-h-screen">
-      {/* Cabeçalho */}
-      <header className="bg-blue-600 text-white p-4 text-center">
-        <h1 className="text-3xl font-bold">NEXUS</h1>
-        <p className="text-sm mt-1">Sua ponte entre quem você é e quem você pode se tornar</p>
-      </header>
+      <Header />
 
       {/* Conteúdo */}
       <main className="flex-1 p-8 max-w-2xl mx-auto">

@@ -1,15 +1,17 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import Header from '../components/Header'
 
 export default function Impacto() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-gray-50">
-      <header className="bg-gradient-to-r from-purple-600 to-blue-500 text-white p-6 shadow-md text-center">
-        <h1 className="text-2xl font-bold">✨ Seu Legado de Impacto</h1>
-        <p className="text-sm mt-1">Sua jornada individual está gerando transformação coletiva</p>
-      </header>
+      <Header />
 
       <main className="p-8 max-w-6xl mx-auto grid gap-6">
+        <div className="bg-gradient-to-r from-purple-600 to-blue-500 text-white p-6 rounded-2xl shadow">
+          <h1 className="text-2xl font-bold">✨ Seu Legado de Impacto</h1>
+          <p className="text-sm mt-1">Sua jornada individual está gerando transformação coletiva</p>
+        </div>
         <section className="grid grid-cols-2 md:grid-cols-4 gap-4">
           <div className="bg-white rounded-2xl p-6 text-center shadow-md">
             <div className="text-3xl">👥</div>

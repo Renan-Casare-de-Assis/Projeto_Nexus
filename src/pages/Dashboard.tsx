@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link, useLocation } from 'react-router-dom'
+import Header from '../components/Header'
 
 function RadarChart({ items, size = 300 }: { items: { name: string; value: number }[]; size?: number }) {
   const n = items.length
@@ -108,12 +109,13 @@ function Dashboard() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-gray-50">
-      <header className="bg-gradient-to-r from-purple-600 to-blue-500 text-white p-6 text-center shadow-lg">
-        <h1 className="text-3xl font-bold">Olá, {displayName}! 👋</h1>
-        <p className="mt-1">Seu potencial está sendo mapeado — aqui está seu painel de potencial.</p>
-      </header>
+      <Header />
 
       <main className="p-8 max-w-6xl mx-auto">
+        <div className="bg-gradient-to-r from-purple-600 to-blue-500 text-white p-6 text-center rounded-2xl shadow mb-6">
+          <h1 className="text-3xl font-bold">Olá, {displayName}! 👋</h1>
+          <p className="mt-1">Seu potencial está sendo mapeado — aqui está seu painel de potencial.</p>
+        </div>
         <section className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
           {cards.map((c) => (
             <div key={c.title} className="bg-white shadow-xl rounded-2xl p-6 text-center">

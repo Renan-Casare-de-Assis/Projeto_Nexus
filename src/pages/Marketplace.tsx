@@ -1,4 +1,5 @@
 import React from 'react'
+import Header from '../components/Header'
 
 function Badge({ children, className = '' }: { children: React.ReactNode; className?: string }) {
   return <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-semibold ${className}`}>{children}</span>
@@ -19,12 +20,13 @@ export default function Marketplace() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-gray-50">
-      <header className="bg-gradient-to-r from-purple-600 to-blue-500 text-white p-6 shadow-md">
-        <h1 className="text-2xl font-bold">🌍 Marketplace de Impacto</h1>
-        <p className="text-sm mt-1">Oportunidades que desenvolvem suas habilidades e transformam o mundo</p>
-      </header>
+      <Header />
 
       <main className="p-8 max-w-6xl mx-auto">
+        <div className="bg-gradient-to-r from-purple-600 to-blue-500 text-white p-6 rounded-2xl shadow mb-6">
+          <h1 className="text-2xl font-bold">🌍 Marketplace de Impacto</h1>
+          <p className="text-sm mt-1">Oportunidades que desenvolvem suas habilidades e transformam o mundo</p>
+        </div>
         <div className="mb-6 flex flex-wrap gap-2">
           <button className="px-3 py-1 rounded-full bg-gray-100">🎯 Todas</button>
           <button className="px-3 py-1 rounded-full bg-purple-100 text-purple-800">💼 Vagas</button>

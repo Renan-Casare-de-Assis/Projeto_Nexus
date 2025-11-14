@@ -1,15 +1,17 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import Header from '../components/Header'
 
 export default function Jornada() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-gray-50">
-      <header className="bg-gradient-to-r from-purple-600 to-blue-500 text-white p-6 shadow-md">
-        <h1 className="text-2xl font-bold">🎮 Sua Jornada de Transformação</h1>
-        <p className="text-sm mt-1">Rumo a Especialista em Customer Experience</p>
-      </header>
+      <Header />
 
       <main className="p-8 max-w-6xl mx-auto grid gap-6">
+        <div className="bg-gradient-to-r from-purple-600 to-blue-500 text-white p-6 rounded-2xl shadow">
+          <h1 className="text-2xl font-bold">🎮 Sua Jornada de Transformação</h1>
+          <p className="text-sm mt-1">Rumo a Especialista em Customer Experience</p>
+        </div>
         <section className="bg-white rounded-2xl shadow-lg p-6">
           <div className="flex items-center justify-between">
             <div>
