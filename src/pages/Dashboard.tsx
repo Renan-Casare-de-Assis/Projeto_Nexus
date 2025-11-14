@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import Header from '../components/Header'
+import AIModal from '../components/AIModal'
 
 function RadarChart({ items, size = 300 }: { items: { name: string; value: number }[]; size?: number }) {
   const n = items.length
@@ -106,15 +107,41 @@ function Dashboard() {
       </svg>
     )
   }
+  // AI modal state and suggestions
+  const [aiOpen, setAiOpen] = useState(false)
+  const [aiSuggestions, setAiSuggestions] = useState<string[]>([])
+
+  useEffect(() => {
+    // load previous suggestions if any
+    if (typeof window !== 'undefined') {
+      const raw = localStorage.getItem('nexus_ai_suggestions')
+      if (raw) {
+        try { setAiSuggestions(JSON.parse(raw)) } catch { /* ignore */ }
+      }
+    }
+  }, [])
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') localStorage.setItem('nexus_ai_suggestions', JSON.stringify(aiSuggestions))
+  }, [aiSuggestions])
+
+  const handleGenerate = (s: string) => {
+    setAiSuggestions((prev) => [s, ...prev])
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-gray-50">
       <Header />
 
       <main className="p-8 max-w-6xl mx-auto">
-        <div className="bg-gradient-to-r from-purple-600 to-blue-500 text-white p-6 text-center rounded-2xl shadow mb-6">
-          <h1 className="text-3xl font-bold">Olá, {displayName}! 👋</h1>
-          <p className="mt-1">Seu potencial está sendo mapeado — aqui está seu painel de potencial.</p>
+        <div className="bg-gradient-to-r from-purple-600 to-blue-500 text-white p-6 text-left rounded-2xl shadow mb-6 flex items-center justify-between">
+          <div>
+            <h1 className="text-3xl font-bold">Olá, {displayName}! 👋</h1>
+            <p className="mt-1">Seu potencial está sendo mapeado — aqui está seu painel de potencial.</p>
+          </div>
+          <div className="flex items-center gap-3">
+            <button onClick={() => setAiOpen(true)} className="px-3 py-2 rounded bg-white/10 hover:bg-white/20">Sugestões IA</button>
+          </div>
         </div>
         <section className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
           {cards.map((c) => (
@@ -122,9 +149,25 @@ function Dashboard() {
               <h2 className="font-semibold text-gray-700 mb-2">{c.title}</h2>
               <p className={`text-4xl font-bold ${c.color}`}>{c.value}</p>
               <p className="text-gray-500 text-sm mt-2">{c.hint}</p>
+              <div className="mt-2 text-xs text-gray-400">Match e métricas geradas por análise de IA</div>
             </div>
           ))}
         </section>
+
+        {aiSuggestions.length > 0 && (
+          <section className="mb-6">
+            <h3 className="text-lg font-semibold mb-3">Sugestões geradas pela IA</h3>
+            <div className="grid gap-3">
+              {aiSuggestions.map((s, i) => (
+                <div key={i} className="bg-white p-4 rounded shadow">
+                  <div className="text-sm text-gray-800">{s}</div>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
+        <AIModal isOpen={aiOpen} onClose={() => setAiOpen(false)} onGenerate={handleGenerate} userName={displayName} />
 
         <section className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           <div className="lg:col-span-2 bg-white rounded-2xl shadow-lg p-6">

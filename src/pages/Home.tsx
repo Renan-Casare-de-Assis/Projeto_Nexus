@@ -5,6 +5,8 @@ import Header from '../components/Header'
 function Home() {
   const navigate = useNavigate();
   const [name, setName] = useState('')
+  const [profession, setProfession] = useState('')
+  const [dream, setDream] = useState('')
 
   const handleStart = (e: React.FormEvent) => {
     e.preventDefault();
@@ -47,6 +49,8 @@ function Home() {
               <label className="block font-medium mb-1">Qual sua profissão ou atividade atual?</label>
               <input
                 type="text"
+                value={profession}
+                onChange={(e) => setProfession(e.target.value)}
                 placeholder="Ex: Vendedor, Professor, Desempregado..."
                 className="w-full border rounded p-2"
               />
@@ -56,6 +60,8 @@ function Home() {
               <label className="block font-medium mb-1">Se pudesse trabalhar com qualquer coisa, o que seria?</label>
               <input
                 type="text"
+                value={dream}
+                onChange={(e) => setDream(e.target.value)}
                 placeholder="Não se preocupe em ser realista agora. Sonhe alto!"
                 className="w-full border rounded p-2"
               />

@@ -69,6 +69,8 @@ function Oportunidades() {
     { title: 'Especialista em Sustentabilidade', time: '12-24 meses', cost: 'R$ 4k', salary: 'R$ 7k–12k', happiness: 'Muito Alta', ods: 'ODS 11, 13', match: 76 },
   ]
 
+  const topMatch = Math.max(...careers.map(c => c.match))
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-gray-50">
       <Header />
@@ -80,7 +82,10 @@ function Oportunidades() {
         </div>
         <section className="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
           {careers.map((c) => (
-            <div key={c.title} className="h-full">
+            <div key={c.title} className={`h-full ${c.match === topMatch ? 'ring-2 ring-purple-300' : ''}`}>
+              <div className="flex items-center justify-end -mt-4 mr-4">
+                {c.match === topMatch && <span className="text-xs bg-purple-600 text-white px-2 py-1 rounded-full">Top Sugestão</span>}
+              </div>
               <CareerCard title={c.title} time={c.time} cost={c.cost} salary={c.salary} happiness={c.happiness} ods={c.ods} match={c.match} />
             </div>
           ))}
